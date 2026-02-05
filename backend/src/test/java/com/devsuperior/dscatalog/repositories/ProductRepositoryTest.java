@@ -16,12 +16,14 @@ public class ProductRepositoryTest {
     @Autowired
     private ProductRepository repository;
 
-    private long exintingId;
+    private long existingId;
+    private long noExistingId;
     private long countTotalProducts;
 
     @BeforeEach
     void setUp() throws Exception{
-        exintingId = 1L;
+        existingId = 1L;
+        noExistingId = 1000L;
         countTotalProducts = 25L;
     }
 
@@ -46,11 +48,30 @@ public class ProductRepositoryTest {
     @Test
     public void deleteShouldDeleteObjectWheIdExists(){
 
-        repository.deleteById(exintingId);
+        repository.deleteById(existingId);
 
-        Optional<Product> result = repository.findById(exintingId);
+        Optional<Product> result = repository.findById(existingId);
 
         Assertions.assertFalse(result.isPresent());
 
     }
+
+    @Test
+    public void findByShoulderReturnEmptyOptinalWhenIdExists(){
+
+        Optional<Product> result = repository.findById(existingId);
+        Assertions.assertTrue(result.isPresent());
+
+    }
+
+
+    @Test
+    public void findByShoulderReturnEmptyOptinalWhenIdDoesNoExists(){
+
+        Optional<Product> result = repository.findById(noExistingId);
+        Assertions.assertTrue(result.isEmpty());
+
+    }
+
+
 }
