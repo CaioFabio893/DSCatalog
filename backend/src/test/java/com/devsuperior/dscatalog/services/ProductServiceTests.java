@@ -104,7 +104,6 @@ public class ProductServiceTests {
 
     }
 
-
     // findby retornar  o ResourceNotFoundException quando o id nao existir
     @Test
     public void findByIdShouldThrowResourceNotFoundExceptionWhenDoesNotExist(){
