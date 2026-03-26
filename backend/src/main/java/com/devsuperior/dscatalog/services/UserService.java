@@ -37,7 +37,6 @@ public class UserService {
     private RoleRepository roleRepository;
 
 
-
     @Transactional(readOnly = true)
     public Page<UserDTO> findAllPaged(Pageable pageable){
         Page<User> list =repository.findAll(pageable);
@@ -63,7 +62,7 @@ public class UserService {
 
 
     @Transactional
-    public UserDTO uptade(Long id , UserDTO dto) {
+    public UserDTO uptade(Long id , UserUpdateDTO dto) {
         try {
             User entity = repository.getReferenceById(id);
             copyDtoToEntity(dto,entity);
