@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -34,6 +35,7 @@ public class ProductResource {
     }
 
     // 201 recurso criado
+    @PreAuthorize("hasAnyRole('ROLE_ADM', 'ROLE_OPERATOR')")
     @PostMapping
     public ResponseEntity<ProductDTO> insert(@Valid @RequestBody ProductDTO dto){
         dto = service.insert(dto);
@@ -42,7 +44,7 @@ public class ProductResource {
         return ResponseEntity.created(uri).body(dto);
     }
 
-
+    @PreAuthorize("hasAnyRole('ROLE_ADM', 'ROLE_OPERATOR')")
     @PutMapping(value = "/{id}")
     public ResponseEntity<ProductDTO> uptade(@PathVariable Long id ,@Valid @RequestBody ProductDTO dto){
         dto = service.uptade(id , dto);
@@ -50,6 +52,7 @@ public class ProductResource {
     }
 
     // 204 recurso vazio
+    @PreAuthorize("hasAnyRole('ROLE_ADM', 'ROLE_OPERATOR')")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){
         service.delete(id);
