@@ -37,7 +37,7 @@ public class UserResource {
     }
 
     // 201 recurso criado
-    @PreAuthorize("hasAnyRole('ROLE_ADM')")
+
     @PostMapping
     public ResponseEntity<UserDTO> insert(@Valid @RequestBody UserInsertDTO dto){
         UserDTO newDto = service.insert(dto);
