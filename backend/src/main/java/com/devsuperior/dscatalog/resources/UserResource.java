@@ -36,8 +36,16 @@ public class UserResource {
         return ResponseEntity.ok().body(dto);
     }
 
-    // 201 recurso criado
+    // retornar logado
+    @PreAuthorize("hasAnyRole('ROLE_OPERATOR','ROLE_ADM')")
+    @GetMapping(value = "/me")
+    public ResponseEntity<UserDTO> findME(){
+        UserDTO dto = service.findMe();
+        return ResponseEntity.ok().body(dto);
+    }
 
+
+    // 201 recurso criado
     @PostMapping
     public ResponseEntity<UserDTO> insert(@Valid @RequestBody UserInsertDTO dto){
         UserDTO newDto = service.insert(dto);
