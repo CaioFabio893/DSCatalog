@@ -2,7 +2,7 @@
 
 API REST de catálogo de produtos construída com Java 21 e Spring Boot 3.4, com autenticação OAuth2 via JWT, controle de acesso baseado em roles, paginação com filtros dinâmicos e cobertura de testes em múltiplas camadas.
 
----
+----
 
 ## Tecnologias e Dependências
 
