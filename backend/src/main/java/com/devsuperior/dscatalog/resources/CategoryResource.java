@@ -37,7 +37,7 @@ public class CategoryResource {
     }
 
     // 201 recurso criado
-    @PreAuthorize("hasAnyRole('ROLE_ADM', 'ROLE_OPERATOR')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_OPERATOR')")
     @PostMapping
     public ResponseEntity<CategoryDTO> insert(@RequestBody CategoryDTO dto){
         dto = service.insert(dto);
@@ -46,14 +46,14 @@ public class CategoryResource {
         return ResponseEntity.created(uri).body(dto);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADM', 'ROLE_OPERATOR')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_OPERATOR')")
     @PutMapping(value = "/{id}")
     public ResponseEntity<CategoryDTO> uptade(@PathVariable Long id ,@RequestBody CategoryDTO dto){
         dto = service.uptade(id , dto);
         return ResponseEntity.ok().body(dto);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADM', 'ROLE_OPERATOR')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_OPERATOR')")
     // 204 recurso vazio
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){

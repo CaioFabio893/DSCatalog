@@ -22,14 +22,14 @@ public class UserResource {
     @Autowired
     private UserService service;
 
-    @PreAuthorize("hasAnyRole('ROLE_ADM')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping
     public ResponseEntity<Page<UserDTO>> findAll(Pageable pageable){
         Page<UserDTO> list = service.findAllPaged(pageable);
         return ResponseEntity.ok().body(list);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADM')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(value = "/{id}")
     public ResponseEntity<UserDTO> findById(@PathVariable Long id){
         UserDTO dto = service.findById(id);
@@ -37,7 +37,7 @@ public class UserResource {
     }
 
     // retornar logado
-    @PreAuthorize("hasAnyRole('ROLE_OPERATOR','ROLE_ADM')")
+    @PreAuthorize("hasAnyRole('ROLE_OPERATOR','ROLE_ADMIN')")
     @GetMapping(value = "/me")
     public ResponseEntity<UserDTO> findME(){
         UserDTO dto = service.findMe();
@@ -54,7 +54,7 @@ public class UserResource {
         return ResponseEntity.created(uri).body(newDto);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADM')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping(value = "/{id}")
     public ResponseEntity<UserDTO> uptade(@PathVariable Long id ,@Valid @RequestBody UserUpdateDTO dto){
         UserDTO newDto = service.uptade(id , dto);
@@ -62,7 +62,7 @@ public class UserResource {
     }
 
     // 204 recurso vazio
-    @PreAuthorize("hasAnyRole('ROLE_ADM')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){
         service.delete(id);
